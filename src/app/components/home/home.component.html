@@ -1,1 +1,37 @@
-<p>home works!</p>
+<section class="filters">
+    <mat-form-field>
+        <mat-label>Sort</mat-label> 
+        <mat-select 
+        panelClass="sort-select"
+        [(ngModel)]="sort"
+        >
+            <mat-option value="name">Name</mat-option>
+            <mat-option value="Released">Released</mat-option>
+            <mat-option value="-added">Added</mat-option>
+            <mat-option value="-created">Created</mat-option>
+            <mat-option value="-updated">Updated</mat-option>
+            <mat-option value="-rating">Rating</mat-option>
+            <mat-option value="metacritic">Metacritic</mat-option>
+        </mat-select>
+    </mat-form-field>
+</section>
+<main class="games">
+    <ng-container *ngFor="let game of games">
+        <article class="game">
+            <figure class="game-thumb-container">
+                <img *ngIf="game.background_image" class="thumbnail"
+                src= '{{ game.background_image }}'
+                    alt="'thumbnail">
+                    <p *ngIf="!game.background_image">No image</p>
+            </figure>
+            <figure class="description">
+                <figcaption>{{game.name}}</figcaption>
+                <p class="game-platforms">
+                    <img *ngFor="let gamePlatform of game.parent_platforms" class="game-platform"
+                    src="/assets/image/platforms/{{gamePlatform?.platform.slug}}.png" alt="slug"/> 
+                </p>
+                
+            </figure>
+        </article>
+    </ng-container>
+</main>
